@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard</title>
+
+  <!-- Optional separate CSS file -->
+  <link rel="stylesheet" href="dashboard.css" />
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #007bff;
+      color: white;
+      padding: 15px 20px;
+      border-radius: 8px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    button {
+      background: #ff4d4d;
+      border: none;
+      padding: 8px 15px;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #cc0000;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 25px;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background: #007bff;
+      color: white;
+    }
+
+    select {
+      padding: 5px;
+      border-radius: 5px;
+    }
+
+    .action-btn {
+      background: #28a745;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 6px;
+    }
+
+    .delete-btn {
+      background: #dc3545;
+    }
+
+    .stats-bar {
+      margin-top: 24px;
+      margin-bottom: 24px;
+      padding: 12px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.05);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+    }
+
+    .stats-bar span {
+      font-weight: 500;
+      color: #333;
+    }
+
+    .link-back {
+      margin-top: 12px;
+      display: inline-block;
+      color: #007bff;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>👑 Admin Dashboard</h1>
+    <div>
+      <span id="userName">Loading...</span>
+      (<span id="userRole">Admin</span>)
+      <button onclick="logoutUser()">Logout</button>
+    </div>
+  </div>
+
+  <div class="stats-bar">
+    <span id="stats-users">Users: loading...</span>
+    <span id="stats-jobs">Jobs: loading...</span>
+    <span id="stats-attendance">Attendance records: loading...</span>
+  </div>
+
+  <h2>All Registered Users</h2>
+  <table id="userTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="userList">
+      <tr>
+        <td colspan="4" align="center">Loading users...</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Admin logic -->
+  <script type="module" src="./admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HR Dashboard</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #28a745;
+      color: white;
+      padding: 15px 20px;
+      border-radius: 8px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    button {
+      background: #dc3545;
+      border: none;
+      padding: 8px 15px;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #b52a37;
+    }
+
+    .form-container {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    .job-list {
+      margin-top: 30px;
+    }
+
+    .job-card {
+      background: white;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .job-card h3 {
+      margin: 0;
+      color: #28a745;
+    }
+
+    .job-meta {
+      font-size: 13px;
+      color: #555;
+      margin-top: 6px;
+    }
+
+    .delete-btn {
+      background: #dc3545;
+      padding: 5px 10px;
+      border-radius: 5px;
+      border: none;
+      color: white;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .delete-btn:hover {
+      background: #b52a37;
+    }
+
+    .small {
+      font-size: 12px;
+      color: #555;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>💼 HR Dashboard</h1>
+    <div>
+      <span id="userName">Loading...</span> (<span id="userRole">HR</span>)
+      <!-- logoutUser will be attached to window in hr.js -->
+      <button onclick="logoutUser()">Logout</button>
+    </div>
+  </div>
+
+  <!-- Post Job Section -->
+  <div class="form-container">
+    <h2>📝 Post a New Job</h2>
+    <input type="text" id="jobTitle" placeholder="Job Title" />
+    <textarea id="jobDesc" rows="3" placeholder="Job Description"></textarea>
+    <input type="text" id="jobLocation" placeholder="Job Location" />
+    <input type="number" id="jobSalary" placeholder="Salary (in ₹)" />
+    <button id="postJobBtn">Post Job</button>
+    <p class="small" id="jobMessage"></p>
+  </div>
+
+  <!-- Posted Jobs List -->
+  <div class="job-list">
+    <h2>📋 Posted Jobs</h2>
+    <div id="jobsContainer">Loading jobs...</div>
+  </div>
+
+  <!-- AI Resume Screening with OpenRouter backend -->
+  <div class="form-container" style="margin-top:20px;">
+    <h2>📄 Upload Resume for AI Screening</h2>
+    <p class="small">
+      Upload a <b>.txt</b> resume for best results. (<b>.pdf</b> is also supported,
+      but text extraction can be imperfect.)
+    </p>
+
+    <label for="aiJobDescription">Job Description for this Candidate:</label>
+    <textarea
+      id="aiJobDescription"
+      rows="3"
+      placeholder="Paste the job description for this role..."
+    ></textarea>
+
+    <!-- Only txt and pdf are supported in hr.js -->
+    <input
+      type="file"
+      id="resumeUpload"
+      accept=".txt,.pdf,text/plain"
+    />
+    <button id="analyzeResumeBtn">Analyze Resume with AI</button>
+
+    <pre
+      id="aiResumeResult"
+      style="
+        background:#eee;
+        padding:10px;
+        margin-top:10px;
+        white-space: pre-wrap;
+        max-height: 350px;
+        overflow:auto;
+      "
+    ></pre>
+  </div>
+
+  <!-- pdf.js for reading PDFs -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.13.216/pdf.min.js"></script>
+
+  <!-- HR logic (Firebase + Firestore + AI API) -->
+  <script type="module" src="./hr.js"></script>
+</body>
+</html>

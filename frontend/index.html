@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FWC HRMS – AI Powered</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Centered auth container */
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: #f4f6fb;
+    }
+
+    .auth-wrapper {
+      min-height: calc(100vh - 56px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .auth-card-box {
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
+      width: 360px;
+    }
+
+    .auth-card-box h1 {
+      margin-top: 0;
+      margin-bottom: 4px;
+      font-size: 22px;
+      color: #111827;
+    }
+
+    .auth-card-box h2 {
+      margin: 10px 0 16px;
+      font-size: 18px;
+      color: #111827;
+    }
+
+    .auth-card-box input,
+    .auth-card-box select {
+      width: 100%;
+      padding: 10px;
+      margin: 6px 0 10px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      font-size: 14px;
+    }
+
+    .auth-card-box button {
+      width: 100%;
+      margin-top: 8px;
+    }
+
+    .auth-footer-text {
+      font-size: 13px;
+      margin-top: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <!-- Top bar -->
+  <header class="topbar">
+    <h1>FWC HRMS – AI Powered</h1>
+    <button id="logoutBtn" class="btn btn-secondary hidden">Logout</button>
+  </header>
+
+  <!-- ============ AUTH SECTION (Login + Register) ============ -->
+  <main id="auth-section" class="auth-wrapper">
+    <div class="auth-card-box">
+      <h1>AI Recruitment System</h1>
+
+      <!-- LOGIN CARD (default visible) -->
+      <div class="card auth-card" id="login-card">
+        <h2>Login</h2>
+        <input id="loginEmail" type="email" placeholder="Email" />
+        <input id="loginPassword" type="password" placeholder="Password" />
+        <button id="loginBtn" class="btn btn-primary">Login</button>
+
+        <p class="auth-footer-text">
+          New here?
+          <span id="showRegister" class="link">Create an account</span>
+        </p>
+        <p id="authMessage" class="message"></p>
+      </div>
+
+      <!-- REGISTER CARD (hidden initially) -->
+      <div class="card auth-card hidden" id="register-card">
+        <h2>Create Account</h2>
+
+        <!-- Full name (used as regName in script.js) -->
+        <input id="regName" type="text" placeholder="Full Name" />
+
+        <input id="regEmail" type="email" placeholder="Email" />
+        <input
+          id="regPassword"
+          type="password"
+          placeholder="Password (min 6 chars)"
+        />
+
+        <label for="regRole">Role</label>
+        <select id="regRole">
+          <!-- Order & labels updated – values stay same for script.js -->
+          <option value="employee" selected>Employee</option>
+          <option value="hr">HR Recruiter</option>
+          <option value="manager">Manager</option>
+          <option value="admin">Management Admin</option>
+        </select>
+
+        <button id="registerBtn" class="btn btn-primary">Register</button>
+
+        <p class="auth-footer-text">
+          Already have an account?
+          <span id="showLogin" class="link">Back to login</span>
+        </p>
+        <p id="registerMessage" class="message"></p>
+      </div>
+    </div>
+  </main>
+
+  <!-- ============ DASHBOARD SECTION (single-page fallback) ============ -->
+  <main id="dashboard-section" class="hidden">
+    <div class="card">
+      <h2 id="welcomeTitle">Dashboard</h2>
+      <p id="userRoleText"></p>
+    </div>
+
+    <!-- ADMIN DASHBOARD (simple stats list) -->
+    <section id="admin-dashboard" class="card hidden">
+      <h3>Admin Dashboard</h3>
+      <p>Shows counts of registered users by role.</p>
+      <button id="refreshStatsBtn" class="btn btn-secondary">
+        Refresh Stats
+      </button>
+      <pre id="adminStats" class="output-box"></pre>
+    </section>
+
+    <!-- HR DASHBOARD (AI resume screening) -->
+    <section id="hr-dashboard" class="card hidden">
+      <h3>HR – AI Resume Screening</h3>
+
+      <label>Job Description</label>
+      <textarea
+        id="jobDescription"
+        rows="4"
+        placeholder="Paste job description here..."
+      ></textarea>
+
+      <label>Candidate Resume Text</label>
+      <textarea
+        id="resumeText"
+        rows="8"
+        placeholder="Paste resume text here (for hackathon; file parsing can be added later)..."
+      ></textarea>
+
+      <button id="analyzeBtn" class="btn btn-primary">
+        Analyze Resume with AI
+      </button>
+
+      <h4>AI Analysis</h4>
+      <pre id="analysisOutput" class="output-box"></pre>
+    </section>
+
+    <!-- EMPLOYEE DASHBOARD (attendance demo) -->
+    <section id="employee-dashboard" class="card hidden">
+      <h3>Employee Dashboard</h3>
+      <p>Simple attendance demo using Firestore.</p>
+      <button id="markAttendanceBtn" class="btn btn-primary">
+        Mark Present Today
+      </button>
+      <p id="attendanceMessage" class="message"></p>
+    </section>
+  </main>
+
+  <!-- script.js is a module because it uses ES module imports -->
+  <script type="module" src="script.js"></script>
+</body>
+</html>

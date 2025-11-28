@@ -1,0 +1,15 @@
+# Backend dependencies
+backend/node_modules/
+
+# (In case you ever have these)
+frontend/node_modules/
+node_modules/
+
+# Env files
+.env
+backend/.env
+frontend/.env
+
+# Build artifacts (if you create them later)
+dist/
+build/

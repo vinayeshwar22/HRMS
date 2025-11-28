@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manager Dashboard</title>
+
+  <!-- (Optional) shared CSS -->
+  <link rel="stylesheet" href="dashboard.css" />
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      padding: 20px;
+      margin: 0;
+    }
+    .dashboard {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.07);
+    }
+    h1, h3, p {
+      margin: 0 0 15px 0;
+    }
+    hr {
+      margin: 20px 0;
+    }
+    button {
+      background: #d9534f;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #c9302c;
+    }
+    .section {
+      margin-top: 24px;
+    }
+    .section h2 {
+      margin-bottom: 15px;
+      color: #333;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background: #007bff;
+      color: white;
+    }
+    /* Task section */
+    #tasks-section {
+      margin-top: 32px;
+      padding-top: 20px;
+      border-top: 2px solid #007bff;
+    }
+    form label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    form input, form select {
+      padding: 6px;
+      width: 100%;
+      max-width: 350px;
+      margin-bottom: 16px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    form button {
+      background: #007bff;
+      padding: 10px 25px;
+      border-radius: 5px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+    form button:hover {
+      background: #0056b3;
+    }
+    .drop-btn {
+      background: #dc3545;
+      color: #fff;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .drop-btn:hover {
+      background: #b52a36;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <h1>Welcome, <span id="user-name">Loading...</span> 👋</h1>
+    <h3>Role: <span id="user-role">Manager</span></h3>
+    <hr />
+    <p>✅ You are logged in as <b>Manager</b>. You can oversee HRs and Employees here.</p>
+    <button onclick="logoutUser()">Logout</button>
+
+    <div class="section" id="hr-section">
+      <h2>HR Personnel</h2>
+      <table id="hrTable">
+        <thead>
+          <tr><th>Name</th><th>Email</th><th>Role</th></tr>
+        </thead>
+        <tbody id="hrList">
+          <tr><td colspan="3">Loading HR personnel...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section" id="employee-section">
+      <h2>Employees</h2>
+      <table id="employeeTable">
+        <thead>
+          <tr><th>Name</th><th>Email</th><th>Role</th></tr>
+        </thead>
+        <tbody id="employeeList">
+          <tr><td colspan="3">Loading employees...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section" id="tasks-section">
+      <h2>Assign New Task</h2>
+      <form id="assignTaskForm">
+        <label for="taskTitle">Task Title:</label>
+        <input type="text" id="taskTitle" name="taskTitle" required />
+
+        <label for="taskAssignee">Assign to:</label>
+        <select id="taskAssignee" name="taskAssignee" required>
+          <option value="">Select HR or Employee</option>
+        </select>
+
+        <button type="submit">Assign Task</button>
+      </form>
+
+      <h3>Assigned Tasks</h3>
+      <table id="tasksTable">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Assignee</th>
+            <th>Status</th>
+            <th>Actions</th> <!-- 👈 Drop button column -->
+          </tr>
+        </thead>
+        <tbody id="tasksList">
+          <tr><td colspan="4">Loading tasks...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Manager logic -->
+  <script type="module" src="./manager.js"></script>
+</body>
+</html>
